@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/node_modules/vue/dist/vue.js"></script>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/game.css" media="screen" />
+</head>
+
+<body>
+    <div id="app">
+        <!-- player details -->
+        <div class="w-3/4 mx-auto">
+            <section class="flex mx-auto w-5/6 mt-8">
+                <div class="flex-1 text-center">
+                    <h1 class="text-3xl font-bold mb-6">YOU</h1>
+                    <div class="healthBar">
+                        <div :class="['healthBar', 'mx-0', 'h-10', 'flex-1']"
+                            :style="{width: playerHealth + '%', backgroundColor: playerHealthBar.backgroundColor, color: 'white'}">
+                            {{playerHealth}}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 text-center">
+                    <h1 class="text-3xl font-bold mb-6">MONSTER</h1>
+                    <div class="healthBar">
+                        <div  class="healthBar mx-0 h-10 flex-1"
+                            :style="{width: monsterHealth + '%', backgroundColor: monsterHealthBar.backgroundColor, color: 'white'}">
+                            {{monsterHealth}}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buttons  -->
+            <section v-if="!gameIsRunning">
+                <div class="startGame p-4 flex w-5/6 mx-auto border m-6 rounded border-b-2 shadow-md">
+                    <button @click="startGame"
+                        class="py-2 px-4 rounded-md border-b-2 border-gray-800 mx-auto hover:bg-green-300 bg-green-200 text-2xl">START
+                        NEW
+                        GAME</button>
+                </div>
+            </section>
+
+            <section v-else-if="playerHealth <= 0 || monsterHealth <= 0">
+                <div class="btns p-4 flex w-5/6 mx-auto border m-6 rounded border-b-2 shadow-md justify-center">
+                    <button @click="startGame"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-blue-500 bg-blue-400 text-2xl">PLAY
+                        AGAIN
+                    </button>
+                    <button @click="gameIsRunning = !gameIsRunning"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-gray-300 bg-gray-200 text-2xl">
+                        GIVE
+                        UP
+                    </button>
+                </div>
+            </section>
+
+            <section v-else>
+                <div class="btns p-4 flex w-5/6 mx-auto border m-6 rounded border-b-2 shadow-md justify-center">
+                    <button @click="attack"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-red-500 bg-red-400 text-2xl">ATTACK</button>
+                    <button @click="specialAttack"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-orange-500 bg-orange-400 text-2xl">SPECIAL
+                        ATTACK</button>
+                    <button @click="heal"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-green-500 bg-green-400 text-2xl">HEAL</button>
+                    <button @click="giveUp"
+                        class="mx-3 py-2 px-4 rounded-md border-b-2 border-gray-800 hover:bg-gray-300 bg-gray-200 text-2xl">
+                        GIVE
+                        UP</button>
+                </div>
+            </section>
+
+
+            <section v-if="scores.length > 0"
+                class="stats p-4 flex w-5/6 mx-auto border m-6 rounded border-b-2 shadow-md">
+                <div class="w-full">
+                    <ul class="overflow-auto h-64">
+                        <div class="text-center font-bold text-2xl mb-3 " v-if="monsterHealth <= 0">You win!!!</div>
+                        <div class="text-center font-bold text-2xl mb-3 " v-if="playerHealth <= 0">You lose!!!</div>
+
+                        <li :class="[{'player-score': score.isPlayer, 'monster-score': !score.isPlayer}, 'text-center', 'font-bold', 'py-1', 'my-1']"
+                            v-for="score in scores">
+                            {{score.text}}
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+</body>
+<script src="app.js"></script>
+
+</html>

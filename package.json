@@ -1,0 +1,19 @@
+{
+  "name": "VUEAPP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^9.7.4",
+    "postcss-cli": "^7.1.0",
+    "tailwindcss": "^1.2.0",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "postcss css/styles.css -o css/style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

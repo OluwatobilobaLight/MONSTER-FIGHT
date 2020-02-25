@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+.strength {
+    width: 300px;
+    background-color: green;
+    text-align: center;
+}
+.healthBar {
+    @apply bg-gray-200 rounded-sm h-10 mx-12 flex-1;
+    width: 80%;
+    transition: width 500ms;
+}
+.pscore {
+    @apply flex items-center justify-center h-10 font-bold text-white;
+}
+.cpuscore {
+    @apply flex items-center justify-center h-10 font-bold text-white;
+}
+.bar {
+    width: 300px;
+    max-width: 300px;
+}
+.player-score {
+    color: blue;
+    background-color: #e4c8ff;
+}
+.monster-score {
+    color: red;
+    background-color: #ffc0c1;
+}
+@tailwind utilities;
